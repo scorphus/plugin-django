@@ -1,4 +1,4 @@
-function django-run-test-server -d 'Run Django on a test project'
+function django-run-test-server -d "Run Django on a test project"
   django-kill-test-server
   clean-pycs
   env PYTHONPATH="$PYTHONPATH:." python -u tests/testproject/manage.py \

@@ -1,4 +1,4 @@
-function django-restart-gunicorn-workers -d 'Restart ALL Gunicorn workers'
+function django-restart-gunicorn-workers -d "Restart ALL Gunicorn workers"
   set pycode "
 from signal import SIGHUP
 

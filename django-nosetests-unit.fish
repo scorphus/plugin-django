@@ -1,4 +1,4 @@
-function django-nosetests-unit -a verbosity -d 'Run nosetests unit tests'
+function django-nosetests-unit -a verbosity -d "Run nosetests unit tests"
   django-tests-cleanup
   env REUSE_DB "1" coverage run tests/testproject/manage.py test tests/ \
     --settings=testproject.settings_test --with-yanc --yanc-color=yes $verbosity
