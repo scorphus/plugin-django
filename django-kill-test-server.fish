@@ -1,4 +1,4 @@
-function django-kill-test-server -a p
+function django-kill-test-server -a p -d "Kill any instance running on port p"
   set argn (count $argv)
   test $argn -ge 1; and test $p -ge 1024; or set p 8000
   set pids (ps ax | grep $p | grep python | awk '{print $1}')
