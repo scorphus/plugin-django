@@ -1,5 +1,11 @@
 function django-run-gunicorn -a p -a w -a l -a t \
     -d "Run Django with Gunicorn ([port] [workers] [level] [timeout])"
+
+  contains -- "--help" $argv; or contains -- "-h" $argv; and begin
+    echo "Usage: django-run-gunicorn [port] [workers] [level] [timeout]"
+    return 0
+  end
+
   set log_levels "debug" "info" "warning" "error" "critical"
   set argn (count $argv)
   test $argn -ge 1; and test $p -ge 1024; or set p 8000           # port
