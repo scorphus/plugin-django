@@ -1,6 +1,9 @@
-function django-restart-gunicorn-workers -d "Restart ALL Gunicorn workers"
+function django-restart-gunicorn-workers -a S -d "Restart ALL Gunicorn workers"
+  set signals "QUIT" "SIGHUP" "SIGUSR2" "WHINCH"
+  test (count $argv) -eq 1; and contains $S $signals; or set S "SIGHUP"
+  echo "Sending $S to all masters..."
   set pycode "
-from signal import SIGHUP
+import signal
 
 import psutil
 
@@ -49,7 +52,7 @@ def restart():
   else:
     print('Restarting %d masters...' % len(sighup_procs))
     for proc in sighup_procs:
-      proc.send_signal(SIGHUP)
+      proc.send_signal(signal.$S)
 
 
 if __name__ == '__main__':
