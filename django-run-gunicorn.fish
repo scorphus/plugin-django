@@ -12,11 +12,17 @@ function django-run-gunicorn -a p -a w -a l -a t \
   test $argn -ge 2; and test $w -ge 1; or set w 2                    # workers
   test $argn -ge 3; and contains -- "$l" $log_levels; or set l info  # level
   test $argn -ge 4; and test $t -ge 60; or set t 600                 # timeout
-  django-kill-test-server $p
+
   printf "Running with %02d worker%s on $p, $l-logging, timing out with %ss\n" \
     $w (test $w -gt 1; and echo "s"; or echo "") $t
+
+  ps ax | grep 10007 | grep memcached > /dev/null
+  or echo "WARNING: memcached not running!"
+
+  django-kill-test-server $p
   env PYTHONPATH="$PYTHONPATH:.:tests/testproject/" \
     DJANGO_SETTINGS_MODULE="testproject.settings_IGNOREME" \
     gunicorn --log-level $l -w $w -t $t -b 0.0.0.0:$p \
     testproject.wsgi
+
 end
