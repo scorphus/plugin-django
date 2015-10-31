@@ -1,7 +1,7 @@
 function django-signal-gunicorn-masters -a S \
     -d "Send signal to ALL Gunicorn masters"
 
-  set signals "QUIT" "SIGHUP" "SIGUSR2" "WHINCH"
+  set signals "HUP" "QUIT" "INT" "TERM" "TTIN" "TTOU" "USR1" "USR2" "WINCH"
   test (count $argv) -eq 1; and contains $S $signals; or set S "SIGHUP"
   echo "Sending $S to all masters..."
   set pycode "
