@@ -7,9 +7,9 @@ function django-signal-gunicorn-masters -a S \
   end
 
   set signals "HUP" "QUIT" "INT" "TERM" "TTIN" "TTOU" "USR1" "USR2" "WINCH"
-  test (count $argv) -eq 1; and contains $S $signals; or set S "SIGHUP"
 
-  contains -- "--help" $argv; or contains -- "-h" $argv; and begin
+  contains -- "--help" $argv; or contains -- "-h" $argv; \
+      or test (count $argv) -ne 1; or not contains -- $S $signals; and begin
     __usage $signals
     return 0
   end
