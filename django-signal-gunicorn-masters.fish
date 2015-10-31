@@ -1,9 +1,9 @@
 function django-signal-gunicorn-masters -a S \
     -d "Send signal to ALL Gunicorn masters"
 
-  function __usage -a signals
+  function __usage
     echo "Usage: django-signal-gunicorn-masters SIGNAL"
-    echo "Available signals: $signals"
+    echo "Available signals: $argv"
   end
 
   set signals "HUP" "QUIT" "INT" "TERM" "TTIN" "TTOU" "USR1" "USR2" "WINCH"
