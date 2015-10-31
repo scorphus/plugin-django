@@ -1,4 +1,6 @@
-function django-restart-gunicorn-workers -a S -d "Restart ALL Gunicorn workers"
+function django-signal-gunicorn-masters -a S \
+    -d "Send signal to ALL Gunicorn masters"
+
   set signals "QUIT" "SIGHUP" "SIGUSR2" "WHINCH"
   test (count $argv) -eq 1; and contains $S $signals; or set S "SIGHUP"
   echo "Sending $S to all masters..."
