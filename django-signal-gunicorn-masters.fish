@@ -14,7 +14,7 @@ function django-signal-gunicorn-masters -a S \
     return 0
   end
 
-  echo "Sending $S to all masters..."
+  echo "Collecting masters to send $S..."
   set pycode "
 import signal
 
@@ -63,7 +63,7 @@ def restart():
     print('There is only one left: %d' % pid)
     sighup_procs = set([proc] + list(sighup_procs))
   else:
-    print('Restarting %d masters...' % len(sighup_procs))
+    print('Sending {} to {} masters...'.format('$S', len(sighup_procs)))
     for proc in sighup_procs:
       proc.send_signal(signal.SIG$S)
 
