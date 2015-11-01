@@ -65,7 +65,7 @@ def restart():
   else:
     print('Restarting %d masters...' % len(sighup_procs))
     for proc in sighup_procs:
-      proc.send_signal(signal.$S)
+      proc.send_signal(signal.SIG$S)
 
 
 if __name__ == '__main__':
