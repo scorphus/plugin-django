@@ -10,11 +10,14 @@ function django-watch-gunicorn-procs -a s -d "Watch running Gunicorn processes"
     set awk_cmd '{print $3 "\t" $2 "\t" $5 "\t" $7 "\t" $8 " " $9}'
     ps -efaxw | grep python | grep gunicorn | grep -v grep | pipeset proc_list
     set num_of_lines (echo $proc_list | wc -l)
+    set lines ""
     for _ in (seq (math (tput lines) - $num_of_lines - 1))
-      echo
+      set lines "$lines\n"
     end
-    echo (date +"%x %X") "- Watching Gunicorn processes every "$s"s:"
-    echo -ne $proc_list | awk $awk_cmd | cut -c 1-(math (tput cols) - 10)
+    set date (date +"%x %X")
+    set max_cols (math (tput cols) - 10)
+    echo -ne $proc_list | awk $awk_cmd | cut -c 1-$max_cols | sort -n | pipeset p_list
+    echo -ne $lines$date" - Watching Gunicorn processes every "$s"s:\n"$p_list
     sleep $s
   end
 end
