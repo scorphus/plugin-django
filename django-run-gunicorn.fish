@@ -19,10 +19,14 @@ function django-run-gunicorn -a p -a w -a l -a t \
   ps ax | grep 10007 | grep memcached > /dev/null
   or echo "WARNING: memcached not running!"
 
+  [ -z (printenv PYTHONPATH) ]
+    and set -x PYTHONPATH "$PYTHONPATH:.:tests/testproject/"
+  [ -z (printenv DJANGO_SETTINGS_MODULE) ]
+    and set -x DJANGO_SETTINGS_MODULE "testproject.settings_IGNOREME"
+  [ -z (printenv WSGI_APP) ]
+    and set -x WSGI_APP "testproject.wsgi"
+
   django-kill-test-server $p
-  env PYTHONPATH="$PYTHONPATH:.:tests/testproject/" \
-    DJANGO_SETTINGS_MODULE="testproject.settings_IGNOREME" \
-    gunicorn --log-level $l -w $w -t $t -b 0.0.0.0:$p \
-    testproject.wsgi
+  gunicorn --log-level $l -w $w -t $t -b 0.0.0.0:$p $WSGI_APP
 
 end
