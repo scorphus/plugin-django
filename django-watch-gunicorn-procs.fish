@@ -7,7 +7,7 @@ function django-watch-gunicorn-procs -a s -d "Watch running Gunicorn processes"
 
   test (count $argv) -eq 1; or set s 2
   while true
-    set awk_cmd '{print $3 "\t" $2 "\t" $5 "\t" $7 "\t" $8 " " $9}'
+    set awk_cmd '{print $3 "\t" $2 "\t" $5 "\t" $7 "\t" $8 " " $9 " " $17 " " $18}'
     ps -efaxw | grep python | grep gunicorn | grep -v grep | pipeset proc_list
     set num_of_lines (echo $proc_list | wc -l)
     set lines ""
