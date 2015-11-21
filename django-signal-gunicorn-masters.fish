@@ -1,5 +1,5 @@
 function django-signal-gunicorn-masters -a S \
-    -d "Send signal to ALL Gunicorn masters"
+    -d "Send SIGNAL to all Gunicorn masters"
 
   function __usage
     echo "Usage: django-signal-gunicorn-masters SIGNAL"

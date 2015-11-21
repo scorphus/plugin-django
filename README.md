@@ -17,7 +17,7 @@ functions are included:
 - `django-kill-test-server`: Kill the aforementioned instance
 - `django-run-gunicorn`: Run Django with Gunicorn (see function description)
 - `django-restart-memcached`: Restart memcached on port `10007`
-- `django-restart-gunicorn-workers`: Restart ALL Gunicorn workers
+- `django-signal-gunicorn-workers`: Send SIGNAL to all Gunicorn masters
 - `django-tests-cleanup`: Clean pycs, reset installed_test
 - `django-nosetests-unit`: Run nosetests unit tests
 - `django-nosetests-unit-v`: Run nosetests unit tests verbosely
