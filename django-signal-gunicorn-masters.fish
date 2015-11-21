@@ -26,7 +26,7 @@ import psutil
 def restart():
   processes = {}
   parent_pids = []
-  sighup_procs = set()
+  master_procs = set()
   for proc in psutil.process_iter():
     try:
       pinfo = proc.as_dict(attrs=['name', 'cmdline'])
@@ -40,7 +40,7 @@ def restart():
             print('Found the master itself: %s (%d)' % (
               proc.name(), proc.pid
             ))
-            sighup_procs.add(proc)
+            master_procs.add(proc)
             processes[proc.pid] = proc
             continue
           try:
@@ -54,7 +54,7 @@ def restart():
               print('Found a worker’s master: %s (%d)' % (
                 pnt_name, pnt_pid
               ))
-              sighup_procs.add(processes[pnt_pid])
+              master_procs.add(processes[pnt_pid])
             parent_pids.append(pnt_pid)
             processes[proc.pid] = proc
 
@@ -63,10 +63,10 @@ def restart():
   elif len(processes) == 1:
     pid, proc = processes.popitem()
     print('There is only one left: %d' % pid)
-    sighup_procs = set([proc] + list(sighup_procs))
+    master_procs = set([proc] + list(master_procs))
   else:
-    print('Sending {} to {} masters...'.format('$S', len(sighup_procs)))
-    for proc in sighup_procs:
+    print('Sending {} to {} masters...'.format('$S', len(master_procs)))
+    for proc in master_procs:
       proc.send_signal(signal.SIG$S)
 
 
