@@ -56,14 +56,14 @@ def restart():
 
   if not processes:
     print('Nothing to do')
+    return
+
   elif len(processes) == 1:
-    pid, proc = processes.popitem()
-    print('There is only one left: %d' % pid)
     master_procs = set([proc] + list(master_procs))
-  else:
-    print('Sending {} to {} masters...'.format('$S', len(master_procs)))
-    for proc in master_procs:
-      proc.send_signal(signal.SIG$S)
+
+  print('Sending {} to {} masters...'.format('$S', len(master_procs)))
+  for proc in master_procs:
+    proc.send_signal(signal.SIG$S)
 
 
 if __name__ == '__main__':
