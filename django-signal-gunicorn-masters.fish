@@ -37,9 +37,7 @@ def restart():
         if pinfo['cmdline'] and len(pinfo['cmdline']) > 1 \
            and pinfo['cmdline'][1].endswith('gunicorn'):
           if proc.pid in parent_pids:
-            print('Found the master itself: %s (%d)' % (
-              proc.name(), proc.pid
-            ))
+            print('Found the master itself: %s (%d)' % (proc.name(), proc.pid))
             master_procs.add(proc)
             processes[proc.pid] = proc
             continue
@@ -51,9 +49,7 @@ def restart():
             pnt_name = proc.parent.name()
           finally:
             if pnt_pid in processes and pnt_pid not in parent_pids:
-              print('Found a worker’s master: %s (%d)' % (
-                pnt_name, pnt_pid
-              ))
+              print('Found a worker’s master: %s (%d)' % (pnt_name, pnt_pid))
               master_procs.add(processes[pnt_pid])
             parent_pids.append(pnt_pid)
             processes[proc.pid] = proc
