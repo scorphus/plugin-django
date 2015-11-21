@@ -33,9 +33,9 @@ def restart():
     except psutil.NoSuchProcess:
       pass
     else:
-      if pinfo['name'].startswith('python'):
+      if 'python' in pinfo['name'] or 'gunicorn' in pinfo['name']:
         if pinfo['cmdline'] and len(pinfo['cmdline']) > 1 \
-           and pinfo['cmdline'][1].endswith('gunicorn'):
+           and 'gunicorn' in pinfo['cmdline'][1]:
           if proc.pid in parent_pids:
             print('Found the master itself: %s (%d)' % (proc.name(), proc.pid))
             master_procs.add(proc)
