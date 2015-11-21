@@ -16,6 +16,8 @@ function django-signal-gunicorn-masters -a S \
 
   echo "Collecting masters to send $S..."
   set pycode "
+# -*- coding: utf-8 -*-
+
 import signal
 
 import psutil
