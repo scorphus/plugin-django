@@ -19,7 +19,6 @@ functions are included:
 - `django-restart-memcached`: Restart memcached on port `10007`
 - `django-signal-gunicorn-workers`: Send SIGNAL to all Gunicorn masters
 - `django-list-gunicorn-masters`: List Gunicorn masters
-- `django-tests-cleanup`: Clean pycs, reset installed_test
 - `django-nosetests-unit`: Run nosetests unit tests
 - `django-nosetests-unit-v`: Run nosetests unit tests verbosely
 - `django-nosetests-focus`: Run nosetests focused tests
